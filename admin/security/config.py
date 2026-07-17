@@ -1,0 +1,4 @@
+
+USERNAME = "admin"
+
+PASSWORD_HASH = "8ef2bcc1c258191f58c25ad30179f40a85e9b4091ed0dff9d472baf4058a5ba9"

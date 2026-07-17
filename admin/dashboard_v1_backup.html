@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FutureMind Lab Admin</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<h1>FutureMind Lab Admin</h1>
+
+<h2>Customer Orders</h2>
+
+<table border="1" cellpadding="10">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Product</th>
+<th>Date</th>
+</tr>
+</thead>
+
+<tbody id="orders">
+</tbody>
+
+</table>
+
+
+<script>
+
+fetch("../orders/orders.json")
+
+.then(response => response.json())
+
+.then(data => {
+
+const table = document.getElementById("orders");
+
+
+data.forEach(order => {
+
+let row = document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td>${order.name}</td>
+
+<td>${order.email}</td>
+
+<td>${order.product}</td>
+
+<td>${order.date}</td>
+
+`;
+
+
+table.appendChild(row);
+
+});
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

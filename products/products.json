@@ -1,0 +1,20 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Hunter-X",
+            "category": "AI Trading Intelligence",
+            "version": "V44 Professional",
+            "price": "$49",
+            "status": "Active"
+        },
+        {
+            "id": 2,
+            "name": "AI Education Toolkit",
+            "category": "Education",
+            "version": "V1",
+            "price": "$29",
+            "status": "Coming Soon"
+        }
+    ]
+}
