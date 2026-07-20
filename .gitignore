@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.log
+backup_v51_pages/
+backup_v51_ui/
+cloudflared
+
+orders/orders.json
+
+orders/*backup*.json
