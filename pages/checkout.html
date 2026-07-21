@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | FutureMind Lab</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+.checkout-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.checkout-card{
+    max-width:900px;
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    padding:35px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+}
+
+.product-box h1{
+    font-size:38px;
+}
+
+.feature{
+    margin:12px 0;
+}
+
+.checkout-form input{
+    width:100%;
+    padding:15px;
+    margin:10px 0 20px;
+    border-radius:12px;
+    border:none;
+}
+
+.checkout-form button{
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
+@media(max-width:700px){
+    .checkout-card{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+<div class="navigation">
+
+<div>
+<a href="../index.html">
+🏠 Home
+</a>
+
+<a href="../products/hunter-x.html">
+← Hunter-X
+</a>
+</div>
+
+</div>
+
+
+<div class="checkout-container">
+
+<div class="checkout-card">
+
+<div class="product-box">
+
+<h1>Hunter-X</h1>
+
+<h2>V44 Professional</h2>
+
+<p>
+AI Market Intelligence Platform
+</p>
+
+<hr>
+
+<div class="feature">✓ Market Scanner</div>
+<div class="feature">✓ Risk Analysis</div>
+<div class="feature">✓ Opportunity Detection</div>
+<div class="feature">✓ Professional Reports</div>
+<div class="feature">✓ AI Assisted Insights</div>
+
+</div>
+
+
+<div class="checkout-form">
+
+<h2>Complete Your Order</h2>
+
+<label>Name</label>
+
+<input id="name" 
+type="text" 
+placeholder="Enter your name">
+
+
+<label>Email</label>
+
+<input id="email" 
+type="email" 
+placeholder="Enter your email">
+
+
+<button type="button" onclick="submitOrder()">
+Complete Order
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="../js/checkout.js"></script>
+
+</body>
+</html>
