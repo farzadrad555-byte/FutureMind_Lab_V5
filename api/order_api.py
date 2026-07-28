@@ -3,9 +3,19 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from pathlib import Path
 from datetime import datetime
+import sys
+import uuid
 
-BASE = Path("/content/drive/MyDrive/FutureMind_Lab_V5")
+BASE = Path("/content/drive/MyDrive/FutureMind_Lab_V6.5_CRYPTO_WORK")
 ORDERS = BASE / "orders" / "orders.json"
+
+sys.path.insert(0, str(BASE))
+
+from payment.crypto_gateway import create_crypto_payment
+
+
+def create_order_id():
+    return "FM-" + datetime.now().strftime("%Y%m%d") + "-" + uuid.uuid4().hex[:6].upper()
 
 
 class OrderHandler(BaseHTTPRequestHandler):
@@ -19,11 +29,23 @@ class OrderHandler(BaseHTTPRequestHandler):
 
             order = json.loads(data.decode("utf-8"))
 
-            orders = json.loads(
-                ORDERS.read_text(encoding="utf-8")
+            order["order_id"] = create_order_id()
+
+            payment = create_crypto_payment(
+                order.get("product", "Unknown Product"),
+                order.get("amount", 0)
             )
 
+            order["payment"] = payment
+            order["payment_status"] = "PENDING_PAYMENT"
             order["date"] = str(datetime.now())
+
+            if ORDERS.exists():
+                orders = json.loads(
+                    ORDERS.read_text(encoding="utf-8")
+                )
+            else:
+                orders = []
 
             orders.append(order)
 
@@ -39,7 +61,12 @@ class OrderHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
             self.wfile.write(
-                b'{"status":"success"}'
+                json.dumps({
+                    "status": "success",
+                    "order_id": order["order_id"],
+                    "payment_status": "PENDING_PAYMENT",
+                    "payment": payment
+                }).encode("utf-8")
             )
 
         else:
@@ -52,6 +79,6 @@ server = HTTPServer(
     OrderHandler
 )
 
-print("Order API running on port 9000")
+print("FutureMind Lab V6.5 Crypto Order API with Order ID running on port 9001")
 
 server.serve_forever()

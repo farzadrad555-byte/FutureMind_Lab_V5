@@ -1,10 +1,17 @@
 __pycache__/
 *.pyc
 *.log
-backup_v51_pages/
-backup_v51_ui/
 cloudflared
 
-orders/orders.json
+backup_v51_pages/
+backup_v51_ui/
 
+_ARCHIVE_BACKUPS_V6.5/
+*.zip
+
+orders/orders.json
+orders/orders_live.json
+orders/download_tokens.json
+orders/download_history.json
 orders/*backup*.json
+emails/email_log.json

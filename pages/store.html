@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,224 +12,132 @@
 <style>
 
 body{
-    margin:0;
-    background:#080d1c;
-    color:white;
-    font-family:Arial,sans-serif;
+background:#080d1c;
+color:white;
+font-family:Arial,sans-serif;
 }
-
 
 .hero{
-    text-align:center;
-    padding:80px 20px;
+text-align:center;
+padding:60px 20px;
 }
-
-
-.hero h1{
-    font-size:50px;
-}
-
 
 .highlight{
-    color:#00d9ff;
+color:#00d9ff;
 }
-
 
 .cards{
-
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:25px;
-    padding:40px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:40px;
 }
-
 
 .card{
-
-    width:280px;
-    background:#121a33;
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-
+width:280px;
+background:#121a33;
+padding:30px;
+border-radius:20px;
+text-align:center;
 }
-
 
 .btn{
-
-    display:inline-block;
-    padding:14px 30px;
-    border-radius:30px;
-    background:#00d9ff;
-    color:#001;
-    text-decoration:none;
-    font-weight:bold;
-
+display:inline-block;
+padding:12px 25px;
+background:#00d9ff;
+color:black;
+border-radius:20px;
+text-decoration:none;
+font-weight:bold;
 }
 
-
-.section{
-
-    text-align:center;
-    padding:40px 20px;
-
+.status{
+color:#00d9ff;
 }
-
 
 </style>
 
 </head>
 
-
 <body>
 
 
-<section class="hero">
+<div class="hero">
 
 <h1>
 FutureMind Lab <span class="highlight">Store</span>
 </h1>
 
 <p>
-AI Products • Trading Intelligence • Education • Digital Solutions
+AI Products • Education • Trading Intelligence
 </p>
 
-
-</section>
-
+</div>
 
 
-
-<section class="section">
-
-<h2>Featured Products</h2>
-
-
-<div class="cards">
+<h2 style="text-align:center">
+Featured Products
+</h2>
 
 
+<div class="cards" id="products">
+Loading...
+</div>
+
+
+
+<script>
+
+fetch("../products/products.json")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let box=document.getElementById("products");
+
+box.innerHTML="";
+
+
+data.products.forEach(p=>{
+
+
+box.innerHTML += `
 
 <div class="card">
 
-<h2>🤖 Hunter-X</h2>
+<h2>${p.name}</h2>
 
-<h3>V44 Professional</h3>
+<h3>${p.version}</h3>
 
-<p>
-AI Market Intelligence Platform
+<p>${p.description}</p>
+
+<h2>${p.price}</h2>
+
+<p class="status">
+${p.status}
 </p>
 
 
-<a class="btn" href="../products/hunter-x.html">
+<a class="btn" href="checkout.html?id=${p.id}">
 View Product
 </a>
 
 
 </div>
 
+`;
+
+});
 
 
-
-<div class="card">
-
-<h2>📚 AI Education Toolkit</h2>
+});
 
 
-<p>
-Smart teaching resources and digital learning tools.
-</p>
-
-
-<a class="btn" href="#">
-Coming Soon
-</a>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>📊 Trading Analytics Tools</h2>
-
-
-<p>
-Advanced market analysis solutions.
-</p>
-
-
-<a class="btn" href="#">
-Coming Soon
-</a>
-
-
-</div>
-
-
-
-<div class="card">
-
-<h2>💡 Digital Solutions</h2>
-
-
-<p>
-Templates, tools and productivity products.
-</p>
-
-
-<a class="btn" href="#">
-Coming Soon
-</a>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section class="section">
-
-<h2>
-Build The Future With AI
-</h2>
-
-<p>
-FutureMind Lab creates intelligent digital products
-for creators, educators and entrepreneurs.
-</p>
-
-
-<a class="btn" href="../index.html">
-Back To FutureMind Lab
-</a>
-
-
-</section>
-
-
-
-
-
-<footer class="section">
-
-FutureMind Lab © 2026
-
-</footer>
-
+</script>
 
 
 </body>
 
 </html>
-

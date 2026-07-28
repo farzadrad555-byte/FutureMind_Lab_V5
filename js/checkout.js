@@ -1,42 +1,81 @@
 
 async function submitOrder(){
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
+    console.log("SUBMIT CLICKED");
+    console.log("PRODUCT:", window.selectedProduct);
 
-    if(!name || !email){
-        alert("Please enter your name and email.");
+    if(!window.productReady || !window.selectedProduct){
+        alert("Please wait, product is loading...");
         return;
     }
 
-    const order = {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    if(!name || !email){
+        alert("Please enter your name and email");
+        return;
+    }
+
+    const orderData = {
+
         name: name,
         email: email,
-        product: "Hunter-X V44 Professional"
+
+        product: window.selectedProduct.name,
+        product_id: window.selectedProduct.id,
+
+        amount: window.selectedProduct.price,
+
+        currency: "USD",
+        payment_method: "TEST"
+
     };
 
-    try {
+
+    try{
 
         const response = await fetch("/api/order",{
+
             method:"POST",
+
             headers:{
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(order)
+
+            body:JSON.stringify(orderData)
+
         });
 
-        const result = await response.json();
 
-        if(result.status === "success"){
-            window.location.href="/thank-you.html";
+        const data = await response.json();
+
+
+        if(data.status === "success"){
+
+            localStorage.setItem(
+                "order_id",
+                data.order_id
+            );
+
+            window.location.href =
+            "order_success.html";
+
         }
         else{
-            alert("Order failed. Please try again.");
+
+            alert("Order failed");
+
         }
 
-    } catch(error){
+    }
 
-        alert("Connection error. Please try again.");
+    catch(error){
+
+        console.log(error);
+
+        alert("Connection error");
 
     }
+
 }

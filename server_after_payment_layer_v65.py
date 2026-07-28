@@ -12,12 +12,14 @@ sys.path.append(
 
 from auth import check_login
 
-from payment_config import CRYPTO_CONFIG
+from config.payment_config import (
+    STRIPE_ENABLED,
+    STRIPE_SECRET_KEY,
+    CURRENCY
+)
 
-from payment.crypto_gateway import create_crypto_payment, confirm_crypto_payment
 
-
-BASE = Path("/content/drive/MyDrive/FutureMind_Lab_V6.5_PUBLIC_RELEASE")
+BASE = Path("/content/drive/MyDrive/FutureMind_Lab_V6.5_BEFORE_STRIPE_20260724")
 ORDERS = BASE / "orders" / "orders.json"
 
 SESSIONS = set()
@@ -26,13 +28,6 @@ SESSIONS = set()
 class Handler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
-
-        if self.path.endswith(".html") or self.path == "/":
-            self.send_header(
-                "Content-Type",
-                "text/html; charset=utf-8"
-            )
-
         super().end_headers()
 
 
@@ -96,7 +91,7 @@ class Handler(SimpleHTTPRequestHandler):
 
                     if (
                         order.get("order_id") == valid.get("order_id")
-                        and (order.get("status") == "PAID" or order.get("payment_status") == "PAID")
+                        and order.get("status") == "PAID"
                     ):
                         paid = True
                         break
@@ -285,7 +280,6 @@ class Handler(SimpleHTTPRequestHandler):
                     "status": "success",
                     "order_id": valid.get("order_id"),
                     "product_id": valid.get("product_id"),
-                    "product": valid.get("product", "Hunter-X Professional"),
                     "downloads": count,
                     "limit": 3,
                     "remaining": max(0, 3-count),
@@ -409,7 +403,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 
-        # Payment Request V6.5 Stripe Checkout Ready
+        # Payment Request V6.5 Stripe Ready
         if self.path == "/api/payment/request":
 
             payment_id = "PAY-" + secrets.token_hex(4).upper()
@@ -418,36 +412,13 @@ class Handler(SimpleHTTPRequestHandler):
                 "status": "success",
                 "payment_id": payment_id,
                 "gateway": "TEST",
-                "message": "Test payment mode"
+                "message": "Payment gateway ready"
             }
-
 
             if STRIPE_ENABLED:
 
-                try:
-
-                    checkout_url = create_checkout_session(
-                        STRIPE_SECRET_KEY,
-                        "Hunter-X V44 Professional",
-                        49,
-                        CURRENCY
-                    )
-
-                    response = {
-                        "status": "success",
-                        "payment_id": payment_id,
-                        "gateway": "STRIPE",
-                        "checkout_url": checkout_url
-                    }
-
-
-                except Exception as e:
-
-                    response = {
-                        "status": "error",
-                        "message": str(e)
-                    }
-
+                response["gateway"] = "STRIPE"
+                response["message"] = "Stripe payment initialized"
 
             self.send_response(200)
             self.send_header(
@@ -686,13 +657,8 @@ class Handler(SimpleHTTPRequestHandler):
             )
             self.end_headers()
 
-            response = {
-                "status": "success",
-                "order_id": body.get("order_id")
-            }
-
             self.wfile.write(
-                json.dumps(response).encode("utf-8")
+                b'{"status":"success"}'
             )
 
             return

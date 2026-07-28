@@ -11,6 +11,8 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<script src="js/language.js"></script>
+
 
 <style>
 
@@ -91,13 +93,78 @@ border-radius:20px;
 
 </style>
 
+
+<style>
+
+.language-switch{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-left:15px;
+}
+
+.language-switch button{
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid #00d9ff;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.language-switch button:hover{
+    background:#00d9ff;
+    color:#001;
+}
+
+</style>
+
+
+<style>
+
+.language-switcher{
+display:flex;
+gap:8px;
+align-items:center;
+justify-content:center;
+}
+
+.lang-btn{
+border:none;
+padding:8px 16px;
+border-radius:20px;
+background:#121a33;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.lang-btn:hover{
+background:#00d9ff;
+color:#001;
+}
+
+</style>
+
+
+<style>
+
+.product-card{
+max-width:320px;
+text-align:center;
+margin:auto;
+}
+
+</style>
+
 </head>
 
 
 <body>
 <div class="navigation">
 
-<a href="index.html">
+<a href="index.html" data-lang="home">
 🏠 Home
 </a>
 
@@ -111,17 +178,29 @@ Pricing
 </a>
 
 
-<a href="pages/contact.html">
+<a href="pages/contact.html" data-lang="contact">
 Contact
 </a>
 
-<a href="pages/store.html">
+<a href="pages/store.html" data-lang="store">
 Store
 </a>
 
 <a href="products/hunter-x.html">
 Hunter-X
 </a>
+
+<div class="language-switcher">
+
+<button class="lang-btn" onclick="changeLanguage('en')">
+🇺🇸 EN
+</button>
+
+<button class="lang-btn" onclick="changeLanguage('fa')">
+🇮🇷 FA
+</button>
+
+</div>
 
 </div>
 
@@ -130,15 +209,15 @@ Hunter-X
 
 <section class="hero">
 
-<h1>
+<h1 data-lang="brand">
 FutureMind Lab
 </h1>
 
-<h2>
+<h2 data-lang="hero_title">
 Build The Future With AI
 </h2>
 
-<p>
+<p data-lang="hero_text">
 Intelligent AI-powered digital products
 for creators, educators and entrepreneurs.
 </p>
@@ -151,11 +230,11 @@ into intelligent solutions.
 <div class="hero-buttons">
 
 <a class="btn" href="products/hunter-x.html">
-🚀 Explore Hunter-X
+🚀 <span data-lang="explore">Explore Hunter-X</span>
 </a>
 
 <a class="btn secondary" href="pages/customer_demo.html">
-🤖 View Demo
+🤖 <span data-lang="view_demo">View Demo</span>
 </a>
 
 <a class="btn secondary" href="pages/pricing.html">
@@ -173,34 +252,34 @@ into intelligent solutions.
 
 
 <h2>
-Featured Product
+<span data-lang="featured">Featured Product</span>
 </h2>
 
 
-<div class="card">
+<div class="card product-card">
 
 
-<h2>
+<h2 data-lang="hunter_title">
 🤖 Hunter-X V44 Professional
 </h2>
 
 
-<p>
-AI Market Intelligence Platform
+<p data-lang="hunter_platform">
+<span data-lang="ai_platform">AI Market Intelligence Platform</span>
 </p>
 
 
 <p>
-✓ Market Scanner
+✓ <span data-lang="market_scanner"><span data-lang="market_scanner">Market Scanner</span></span>
 <br>
-✓ Risk Analysis
+✓ <span data-lang="risk_analysis"><span data-lang="risk_analysis">Risk Analysis</span></span>
 <br>
-✓ Professional Reports
+✓ <span data-lang="professional_reports"><span data-lang="professional_reports">Professional Reports</span></span>
 </p>
 
 
 <a class="btn" href="products/hunter-x.html">
-Learn More
+<span data-lang="learn_more">Learn More</span>
 </a>
 
 
@@ -216,7 +295,7 @@ Learn More
 
 
 <h2>
-Why FutureMind Lab?
+<span data-lang="why">Why FutureMind Lab?</span>
 </h2>
 
 
@@ -224,25 +303,25 @@ Why FutureMind Lab?
 
 
 <div class="card">
-<h3>🤖 AI Innovation</h3>
+<h3>🤖 <span data-lang="ai_innovation">AI Innovation</span></h3>
 <p>
-Smart solutions powered by intelligence.
+<span data-lang="ai_innovation_text">Smart solutions powered by intelligence.</span>
 </p>
 </div>
 
 
 <div class="card">
-<h3>🌍 Global Vision</h3>
+<h3>🌍 <span data-lang="global_vision">Global Vision</span></h3>
 <p>
-Products designed for worldwide users.
+<span data-lang="global_vision_text">Products designed for worldwide users.</span>
 </p>
 </div>
 
 
 <div class="card">
-<h3>🚀 Digital Future</h3>
+<h3>🚀 <span data-lang="digital_future">Digital Future</span></h3>
 <p>
-Building tools for tomorrow.
+<span data-lang="digital_future_text">Building tools for tomorrow.</span>
 </p>
 </div>
 
@@ -256,7 +335,7 @@ Building tools for tomorrow.
 
 <footer class="section">
 
-FutureMind Lab © 2026
+<span data-lang="footer">FutureMind Lab © 2026</span>
 
 </footer>
 
@@ -267,11 +346,11 @@ FutureMind Lab © 2026
 <section class="features">
 
 <h2>
-Why Choose Hunter-X?
+<span data-lang="why_hunter"><span data-lang="why_hunter">Why Choose Hunter-X?</span></span>
 </h2>
 
 <p>
-AI-powered intelligence for smarter market decisions.
+<span data-lang="hunter_desc"><span data-lang="smart_market">AI-powered intelligence for smarter market decisions.</span></span>
 </p>
 
 
@@ -281,7 +360,7 @@ AI-powered intelligence for smarter market decisions.
 <div class="feature-card">
 
 <h3>
-📊 Market Scanner
+📊 <span data-lang="market_scanner">Market Scanner</span>
 </h3>
 
 <p>
@@ -295,11 +374,11 @@ with intelligent scanning.
 <div class="feature-card">
 
 <h3>
-🛡 Risk Analysis
+🛡 <span data-lang="risk_analysis">Risk Analysis</span>
 </h3>
 
 <p>
-Evaluate risks before making decisions.
+<span data-lang="risk_analysis_text"><span data-lang="risk_description">Evaluate risks before making decisions.</span></span>
 </p>
 
 </div>
@@ -308,7 +387,7 @@ Evaluate risks before making decisions.
 <div class="feature-card">
 
 <h3>
-🎯 Opportunity Detection
+🎯 <span data-lang="opportunity"><span data-lang="opportunity_detection">Opportunity Detection</span></span>
 </h3>
 
 <p>
@@ -322,11 +401,11 @@ with AI assistance.
 <div class="feature-card">
 
 <h3>
-📈 Professional Reports
+📈 <span data-lang="professional_reports">Professional Reports</span>
 </h3>
 
 <p>
-Generate actionable intelligence reports.
+<span data-lang="professional_reports_text"><span data-lang="reports_description">Generate actionable intelligence reports.</span></span>
 </p>
 
 </div>
@@ -342,11 +421,11 @@ Generate actionable intelligence reports.
 <section class="how-it-works">
 
 <h2>
-How Hunter-X Works
+<span data-lang="how_hunter_works"><span data-lang="how_hunter">How Hunter-X Works</span></span>
 </h2>
 
 <p>
-From market data to intelligent insights.
+<span data-lang="how_desc"><span data-lang="market_insights">From market data to intelligent insights.</span></span>
 </p>
 
 
@@ -409,31 +488,31 @@ AI-assisted insights.
 </h2>
 
 <h3>
-AI Market Intelligence Platform
+<span data-lang="ai_platform">AI Market Intelligence Platform</span>
 </h3>
 
 <p>
-Lifetime Professional Access
+<span data-lang="lifetime_access"><span data-lang="lifetime_access">Lifetime Professional Access</span></span>
 </p>
 
 
 <div class="cta-features">
 
-✓ Full Intelligence Reports
+✓ <span data-lang="full_reports"><span data-lang="full_reports">Full Intelligence Reports</span></span>
 <br>
-✓ Market Scanner
+✓ <span data-lang="market_scanner">Market Scanner</span>
 <br>
-✓ Risk Analysis
+✓ <span data-lang="risk_analysis">Risk Analysis</span>
 <br>
-✓ Opportunity Detection
+✓ <span data-lang="opportunity"><span data-lang="opportunity_detection">Opportunity Detection</span></span>
 <br>
-✓ Future Updates
+✓ <span data-lang="future_updates"><span data-lang="future_updates">Future Updates</span></span>
 
 </div>
 
 
 <a class="btn" href="pages/pricing.html">
-Get Professional Access
+<span data-lang="get_access"><span data-lang="get_access">Get Professional Access</span></span>
 </a>
 
 
@@ -445,11 +524,11 @@ Get Professional Access
 <section class="trust-section">
 
 <h2>
-Why FutureMind Lab?
+<span data-lang="why">Why FutureMind Lab?</span>
 </h2>
 
 <p>
-Building intelligent products for the digital future.
+<span data-lang="digital_future_text">Building intelligent products for the digital future.</span>
 </p>
 
 
@@ -459,11 +538,11 @@ Building intelligent products for the digital future.
 <div class="trust-card">
 
 <h3>
-🤖 AI Innovation
+🤖 <span data-lang="ai_innovation">AI Innovation</span>
 </h3>
 
 <p>
-Smart solutions powered by intelligence.
+<span data-lang="ai_innovation_text">Smart solutions powered by intelligence.</span>
 </p>
 
 </div>
@@ -472,11 +551,11 @@ Smart solutions powered by intelligence.
 <div class="trust-card">
 
 <h3>
-🌍 Global Vision
+🌍 <span data-lang="global_vision">Global Vision</span>
 </h3>
 
 <p>
-Products designed for worldwide users.
+<span data-lang="global_vision_text">Products designed for worldwide users.</span>
 </p>
 
 </div>
@@ -485,11 +564,11 @@ Products designed for worldwide users.
 <div class="trust-card">
 
 <h3>
-🚀 Digital Future
+🚀 <span data-lang="digital_future">Digital Future</span>
 </h3>
 
 <p>
-Building tools for tomorrow.
+<span data-lang="digital_future_text">Building tools for tomorrow.</span>
 </p>
 
 </div>
@@ -498,11 +577,11 @@ Building tools for tomorrow.
 <div class="trust-card">
 
 <h3>
-⭐ Professional Quality
+⭐ <span data-lang="professional_quality"><span data-lang="professional_quality">Professional Quality</span></span>
 </h3>
 
 <p>
-Reliable digital products and experiences.
+<span data-lang="professional_quality_text"><span data-lang="reliable_products">Reliable digital products and experiences.</span></span>
 </p>
 
 </div>

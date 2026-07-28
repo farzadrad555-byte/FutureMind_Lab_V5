@@ -71,11 +71,11 @@
 
 <div>
 <a href="../index.html">
-🏠 Home
+🏠 <span data-lang="home">Home</span>
 </a>
 
 <a href="../products/hunter-x.html">
-← Hunter-X
+← <span data-lang="hunter">Hunter-X</span>
 </a>
 </div>
 
@@ -88,45 +88,45 @@
 
 <div class="product-box">
 
-<h1>Hunter-X</h1>
+<h1><span data-lang="hunter">Hunter-X</span></h1>
 
 <h2>V44 Professional</h2>
 
 <p>
-AI Market Intelligence Platform
+<span data-lang="ai_platform">AI Market Intelligence Platform</span>
 </p>
 
 <hr>
 
-<div class="feature">✓ Market Scanner</div>
-<div class="feature">✓ Risk Analysis</div>
-<div class="feature">✓ Opportunity Detection</div>
-<div class="feature">✓ Professional Reports</div>
-<div class="feature">✓ AI Assisted Insights</div>
+<div class="feature">✓ <span data-lang="market_scanner">Market Scanner</span></div>
+<div class="feature">✓ <span data-lang="risk_analysis">Risk Analysis</span></div>
+<div class="feature">✓ <span data-lang="opportunity_detection">Opportunity Detection</span></div>
+<div class="feature">✓ <span data-lang="professional_reports">Professional Reports</span></div>
+<div class="feature">✓ <span data-lang="professional_insights">AI Assisted Insights</span></div>
 
 </div>
 
 
 <div class="checkout-form">
 
-<h2>Complete Your Order</h2>
+<h2><span data-lang="complete_order">Complete Your Order</span></h2>
 
-<label>Name</label>
+<label><span data-lang="name">Name</span></label>
 
 <input id="name" 
 type="text" 
-placeholder="Enter your name">
+placeholder="Enter your name" data-lang-placeholder="enter_name">
 
 
-<label>Email</label>
+<label><span data-lang="email">Email</span></label>
 
 <input id="email" 
 type="email" 
-placeholder="Enter your email">
+placeholder="Enter your email" data-lang-placeholder="enter_email">
 
 
 <button type="button" onclick="submitOrder()">
-Complete Order
+<span data-lang="complete_order">Complete Order</span>
 </button>
 
 </div>
@@ -134,6 +134,69 @@ Complete Order
 </div>
 
 </div>
+
+
+<script src="../js/language.js"></script>
+
+
+
+<script>
+
+window.selectedProduct = null;
+window.productReady = false;
+
+console.log("CHECKOUT START");
+console.log("URL:", window.location.href);
+console.log(
+"PARAM ID:",
+new URLSearchParams(window.location.search).get("id")
+);
+
+
+
+fetch("../products/products.json")
+.then(response => response.json())
+.then(data => {
+
+const params = new URLSearchParams(
+window.location.search
+);
+
+const productId = params.get("product") || params.get("id");
+
+
+window.selectedProduct = data.products.find(
+p => p.id === productId
+);
+
+window.productReady = true;
+
+console.log("PRODUCT READY:", window.selectedProduct);
+
+
+console.log("PRODUCT DATA:", data);
+console.log("FOUND PRODUCT:", window.selectedProduct);
+
+if(window.selectedProduct){
+
+document.querySelector(".product-box h1").innerText =
+window.selectedProduct.name;
+
+
+document.querySelector(".product-box h2").innerText =
+window.selectedProduct.version;
+
+
+document.querySelector(".product-box p").innerText =
+window.selectedProduct.description;
+
+
+}
+
+});
+
+
+</script>
 
 
 <script src="../js/checkout.js"></script>
